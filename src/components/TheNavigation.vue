@@ -9,6 +9,14 @@
             </router-link>
         </li>
         <li>
+            <router-link
+                    :to="{
+                name: 'signin'
+            }">
+                Sign In
+            </router-link>
+        </li>
+        <li>
             Goran Grbic
         </li>
         <li>
@@ -17,14 +25,6 @@
                 name: 'dashboard'
             }">
                 Dashboard
-            </router-link>
-        </li>
-        <li>
-            <router-link
-                    :to="{
-                name: 'signin'
-            }">
-                Sign In
             </router-link>
         </li>
         <li>
