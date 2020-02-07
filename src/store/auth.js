@@ -9,7 +9,7 @@ export default {
 
     getters: {
         authenticated (state) {
-            return state.token && state.user
+            return !!(state.token && state.user)
         },
         user (state) {
             return state.user
@@ -31,20 +31,29 @@ export default {
             return dispatch('attempt', response.data.token)
         },
 
-        async attempt ({ commit }, token) {
-            commit('SET_TOKEN', token)
+        async attempt ({ commit, state }, token) {
+            if (token) {
+                commit('SET_TOKEN', token)
+            }
+
+            if (!state.token) {
+                return
+            }
 
             try {
-                let response = await axios.get('dashboard', {
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    }
-                })
-
+                let response = await axios.get('dashboard')
                 commit('SET_USER', response.data)
             } catch (e) {
-                console.log(e)
+                commit('SET_TOKEN', null)
+                commit('SET_USER', null)
             }
+        },
+
+        logout ({ commit }) {
+            return axios.post('auth/logout').then(() => {
+                commit('SET_TOKEN', null)
+                commit('SET_USER', null)
+            })
         }
     }
 }

@@ -40,7 +40,9 @@
                         name: 'dashboard'
                     })
                 })
-                    .catch(() => console.log('log failed'))
+                    .catch(() => {
+                        console.log('login failed')
+                    })
             }
         }
     }
