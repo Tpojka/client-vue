@@ -8,34 +8,45 @@
                 Home
             </router-link>
         </li>
-        <li>
-            <router-link
-                    :to="{
-                name: 'signin'
-            }">
-                Sign In
-            </router-link>
-        </li>
-        <li>
-            Goran Grbic
-        </li>
-        <li>
-            <router-link
-                    :to="{
-                name: 'dashboard'
-            }">
-                Dashboard
-            </router-link>
-        </li>
-        <li>
-            <a href="#">Sign Out</a>
-        </li>
+        <template v-if="authenticated">
+            <li>
+                {{ user.name }}
+            </li>
+            <li>
+                <router-link
+                        :to="{
+            name: 'dashboard'
+        }">
+                    Dashboard
+                </router-link>
+            </li>
+            <li>
+                <a href="#">Sign Out</a>
+            </li>
+        </template>
+        <template v-else>
+            <li>
+                <router-link
+                        :to="{
+            name: 'signin'
+        }">
+                    Sign In
+                </router-link>
+            </li>
+        </template>
     </ul>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
-        name: "TheNavigation"
+        computed: {
+            ...mapGetters({
+                authenticated: 'auth/authenticated',
+                user: 'auth/user'
+            })
+        }
     }
 </script>
 
