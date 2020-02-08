@@ -9,7 +9,11 @@
             <input type="password" name="password" id="password" v-model="form.password"/>
         </div>
         <div>
-            <button type="submit">Sign In</button>
+            <!--<button type="submit">Sign In</button>-->
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right"></i>
+            </button>
         </div>
     </form>
 </template>
