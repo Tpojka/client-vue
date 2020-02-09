@@ -27,11 +27,33 @@ export default {
     actions: {
         async login ({ dispatch }, credentials) {
             let response = await axios.post('auth/login', credentials)
-
-            return dispatch('attempt', response.data.token)
+            return dispatch('attemptLogin', response.data.token)
         },
 
-        async attempt ({ commit, state }, token) {
+        async attemptLogin ({ commit, state }, token) {
+            if (token) {
+                commit('SET_TOKEN', token)
+            }
+
+            if (!state.token) {
+                return
+            }
+
+            try {
+                let response = await axios.get('dashboard')
+                commit('SET_USER', response.data)
+            } catch (e) {
+                commit('SET_TOKEN', null)
+                commit('SET_USER', null)
+            }
+        },
+
+        async register ({ dispatch }, credentials) {
+            let response = await axios.post('auth/register', credentials)
+            return dispatch('attemptRegister', response.data.token)
+        },
+
+        async attemptRegister ({ commit, state }, token) {
             if (token) {
                 commit('SET_TOKEN', token)
             }

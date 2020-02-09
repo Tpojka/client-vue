@@ -27,9 +27,14 @@ export default {
         },
 
         async editProfile ({ dispatch }, changingUser) {
-            if (!changingUser.id) {
+            if (!changingUser.id || !(this.token && this.user)) {
                 throw 'Unauthorized action.'
             }
+
+            if (changingUser.name.trim() === this.user.name) {
+                return
+            }
+
             let data = { name: changingUser.name }
             let response = await axios.put('profiles/' + changingUser.id, data)
             //

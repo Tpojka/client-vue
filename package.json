@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --host 0.0.0.0 --allowed-hosts 192.168.100.5"
   },
   "dependencies": {
     "awesome-notifications": "^3.1.0",

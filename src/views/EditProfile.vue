@@ -42,7 +42,7 @@
                 let notifier = new AWN({
                     position: 'top-right',
                     durations: {
-                        global: 2000
+                        global: 1500
                     }
                 })
 

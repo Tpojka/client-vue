@@ -10,9 +10,13 @@
                 <input type="password" name="password" id="password" v-model="form.password"/>
             </div>
             <div class="col s6">
+                <label>Password Confirmation: </label>
+                <input type="password" name="password_confirmation" id="password_confirmation" v-model="form.password_confirmation"/>
+            </div>
+            <div class="col s6">
                 <!--<button type="submit">Sign In</button>-->
 
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light" type="submit" name="action">Register Account
                     <i class="material-icons right"></i>
                 </button>
             </div>
@@ -24,7 +28,7 @@
     import { mapActions } from 'vuex'
 
     export default {
-        name: 'login',
+        name: 'register',
         components: {
             //
         },
@@ -32,16 +36,17 @@
             return {
                 form: {
                     email: '',
-                    password: ''
+                    password: '',
+                    password_confirmation: ''
                 }
             }
         },
         methods: {
             ...mapActions({
-               login: 'auth/login'
+               register: 'auth/register'
             }),
             submit () {
-                this.login(this.form).then(() => {
+                this.register(this.form).then(() => {
                     this.$router.replace({
                         name: 'dashboard'
                     })
