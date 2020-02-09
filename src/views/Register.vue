@@ -2,6 +2,10 @@
     <form @submit.prevent="submit">
         <div class="row">
             <div class="col s6">
+                <label>Name: </label>
+                <input type="text" name="name" id="name" v-model="form.name"/>
+            </div>
+            <div class="col s6">
                 <label>Email: </label>
                 <input type="text" name="email" id="email" v-model="form.email"/>
             </div>
@@ -35,6 +39,7 @@
         data () {
             return {
                 form: {
+                    name: '',
                     email: '',
                     password: '',
                     password_confirmation: ''

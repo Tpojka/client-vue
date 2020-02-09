@@ -37,6 +37,14 @@
                         Sign In
                     </router-link>
                 </li>
+                <li>
+                    <router-link
+                            :to="{
+            name: 'register'
+        }">
+                        Register
+                    </router-link>
+                </li>
             </template>
         </ul>
         <div class="divider"></div>

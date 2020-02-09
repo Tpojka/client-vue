@@ -50,21 +50,20 @@ export default {
 
         async register ({ dispatch }, credentials) {
             let response = await axios.post('auth/register', credentials)
-            return dispatch('attemptRegister', response.data.token)
+            return dispatch('attemptRegister', response.data)
         },
 
-        async attemptRegister ({ commit, state }, token) {
-            if (token) {
-                commit('SET_TOKEN', token)
-            }
-
-            if (!state.token) {
-                return
-            }
-
+        async attemptRegister ({ commit, state }, data) {
             try {
-                let response = await axios.get('dashboard')
-                commit('SET_USER', response.data)
+                if (data.token) {
+                    commit('SET_TOKEN', data.token)
+                }
+
+                if (!state.token) {
+                    return
+                }
+
+                commit('SET_USER', data.user)
             } catch (e) {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
