@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios from 'axios'
 
 export default {
@@ -18,27 +19,29 @@ export default {
         }
     },
     actions: {
-        async attempt ({ commit }, user) {
+        async attemptChange ({ commit }, user) {
             try {
                 commit('SET_USER', user)
             } catch (e) {
-                // console.log('error in api.js:32')
+                //
             }
         },
 
         async editProfile ({ dispatch }, changingUser) {
-            if (!changingUser.id || !(this.token && this.user)) {
+            if (!changingUser.id
+                || !store.getters['auth/authenticated']
+                || store.getters['auth/user']['id'] != changingUser.id) {
                 throw 'Unauthorized action.'
             }
 
-            if (changingUser.name.trim() === this.user.name) {
+            if ('' === changingUser.name) {
                 return
             }
 
             let data = { name: changingUser.name }
             let response = await axios.put('profiles/' + changingUser.id, data)
-            //
-            return dispatch('attempt', response.data)
+
+            return dispatch('attemptChange', response.data)
         }
     }
 }

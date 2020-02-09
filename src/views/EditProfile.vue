@@ -47,11 +47,10 @@
                 })
 
                 this.editProfile(this.user).then(() => {
-                    // new AWN().success()
                     notifier.success('Successfully edited profile.')
                 })
                     .catch(() => {
-                        // new AWN().alert()
+                        // notifier.alert(e)
                         notifier.alert('Something went wrong.')
                     })
             }
