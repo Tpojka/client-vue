@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SignIn from '../views/SignIn.vue'
 import Dashboard from '../views/Dashboard.vue'
+import EditProfile from '../views/EditProfile'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -17,6 +18,19 @@ const routes = [
       path: '/signin',
       name: 'signin',
       component: SignIn
+  },
+  {
+      path: '/edit-profile',
+      name: 'editProfile',
+      component: EditProfile,
+      beforeEnter: (to, from, next) => {
+          if (!store.getters['auth/authenticated']) {
+              return next({
+                  name: 'signin'
+              })
+          }
+          next()
+      }
   },
   {
       path: '/dashboard',

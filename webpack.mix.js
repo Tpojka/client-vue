@@ -13,6 +13,8 @@ let mix = require('laravel-mix');
 
 mix.copy('./node_modules/materialize-css/dist/', 'public/');
 
+mix.copyDirectory('@sw', 'public/img');
+
 // Full API
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.
